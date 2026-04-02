@@ -1,0 +1,15 @@
+<svg viewBox="24 16 80 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#db2777" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Brackets (Gradient) -->
+  <path d="M42 38H30V90H42" stroke="url(#logo-gradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M86 38H98V90H86" stroke="url(#logo-gradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Lightning Bolt (Gradient) -->
+  <path d="M74 24L44 64H64L54 104L84 64H64L74 24Z" fill="url(#logo-gradient)" />
+</svg>

@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2026 Chinmaya Panda. All rights reserved.
+    Proprietary Software - Developed by Chinmaya Panda
+    Website: https://expose.host
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expose — Instant Localhost Tunnels & Webhook Testing</title>
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta
+      name="description"
+      content="Secure, instant localhost tunnels for developers. No signups, no API keys, no friction. Proprietary, privacy-first tunneling for webhooks and mobile testing."
+    />
+    <meta
+      name="keywords"
+      content="localhost tunnel, webhook testing, reverse proxy, developer tools, secure tunneling, expose host"
+    />
+    <link rel="canonical" href="https://expose.host" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://expose.host/" />
+    <meta
+      property="og:title"
+      content="Expose — Instant Localhost Tunnels & Webhook Testing"
+    />
+    <meta
+      property="og:description"
+      content="Expose your local development server to the internet with a single command. No signups. No API keys. No Friction."
+    />
+    <meta property="og:image" content="https://expose.host/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://expose.host/" />
+    <meta
+      property="twitter:title"
+      content="Expose — Instant Localhost Tunnels & Webhook Testing"
+    />
+    <meta
+      property="twitter:description"
+      content="Expose your local HTTP servers to the internet with a single command. No signups. No API keys. No Friction."
+    />
+    <meta property="twitter:image" content="https://expose.host/og-image.png" />
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Expose",
+      "operatingSystem": "Windows, macOS, Linux",
+      "applicationCategory": "DeveloperApplication",
+      "description": "Secure, instant localhost tunnels for webhook testing and mobile development. No signups, no friction.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Expose",
+        "operatingSystem": "Windows, macOS, Linux",
+        "applicationCategory": "DeveloperApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Expose your local development server to the internet with a single command. Secure, fast, and no registration required.",
+        "url": "https://expose.host"
+      }
+    </script>
+    <!-- <script async src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script> -->
+  </head>
+
+  <body>
+    <div class="navbar-wrapper">
+      <nav class="navbar">
+        <a href="/" class="logo">
+          <img src="/logo.svg" alt="Expose Logo" class="logo-img" />
+          Expose
+        </a>
+        <button
+          class="menu-toggle"
+          id="mobile-menu"
+          aria-label="Toggle navigation menu"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="links">
+          <a
+            href="https://github.com/sponsors/havefish"
+            target="_blank"
+            class="nav-sponsor"
+          >
+            <svg class="heart-icon" viewBox="0 0 24 24">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+            Sponsor
+          </a>
+          <a href="#docs" class="nav-link desktop-only">Docs</a>
+          <a href="#security" class="nav-link desktop-only">Security</a>
+          <div class="mobile-toc">
+            <div class="mobile-toc-divider"></div>
+            <a href="#install" class="nav-link mobile-toc-item">Install</a>
+            <a href="#expose-port" class="nav-link mobile-toc-item"
+              >Expose a port</a
+            >
+            <a href="#sticky-tunnels" class="nav-link mobile-toc-item"
+              >Sticky tunnels</a
+            >
+            <a href="#allow-paths" class="nav-link mobile-toc-item"
+              >Allow certain path(s)</a
+            >
+            <a href="#deny-paths" class="nav-link mobile-toc-item"
+              >Deny certain path(s)</a
+            >
+            <a href="#allow-methods" class="nav-link mobile-toc-item"
+              >Allow certain method(s)</a
+            >
+            <a href="#deny-methods" class="nav-link mobile-toc-item"
+              >Deny certain method(s)</a
+            >
+            <a href="#webhook-testing" class="nav-link mobile-toc-item"
+              >Webhook Testing</a
+            >
+            <a href="#uninstall" class="nav-link mobile-toc-item">Uninstall</a>
+            <div class="mobile-toc-divider"></div>
+            <a href="#service-limits" class="nav-link mobile-toc-item"
+              >Service Limits</a
+            >
+            <a href="#terms-privacy" class="nav-link mobile-toc-item"
+              >Terms &amp; Privacy</a
+            >
+            <a href="#contact" class="nav-link mobile-toc-item">Contact</a>
+          </div>
+          <div class="status-badge" id="status-badge">
+            <span class="status-dot" id="status-dot"></span>
+            <span id="status-text">Systems Operational</span>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <main class="hero">
+      <div class="hero-content">
+        <!-- Left: text + CTA + features -->
+        <div class="hero-text">
+          <h1>
+            <span class="highlight">Instant</span> localhost tunnels.
+            <span class="highlight">Zero friction.</span>
+          </h1>
+          <p class="hero-subtitle">
+            Share your local dev server with the world — for demos, webhooks,
+            and mobile testing.
+          </p>
+
+          <div class="actions">
+            <a href="#install-bar" class="btn primary">Get Started</a>
+            <a href="#security" class="btn secondary-cta">
+              <svg
+                class="icon"
+                style="width: 14px; height: 14px"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              Secure by Design
+            </a>
+          </div>
+
+          <div class="hero-features-grid">
+            <div class="feature-tile">
+              <div class="feature-icon">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon
+                    points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+                  ></polygon>
+                </svg>
+              </div>
+              <h3 class="feature-title">Zero Config</h3>
+              <p class="feature-description">
+                No signups, no API keys. We don't want your email address.
+              </p>
+            </div>
+
+            <div class="feature-tile">
+              <div class="feature-icon">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon
+                    points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+                  ></polygon>
+                </svg>
+              </div>
+              <h3 class="feature-title">Smart Filtering</h3>
+              <p class="feature-description">
+                Allow only the paths and methods you want. Block everything
+                else.
+              </p>
+            </div>
+
+            <div class="feature-tile">
+              <div class="feature-icon">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="feature-title">Sticky Tunnels</h3>
+              <p class="feature-description">
+                Same machine, same port, same URL. No more broken webhooks.
+              </p>
+            </div>
+
+            <div class="feature-tile">
+              <div class="feature-icon">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7"></path>
+                  <path d="M7 13v8"></path>
+                  <path d="M17 13v8"></path>
+                  <path d="M2 13h20"></path>
+                </svg>
+              </div>
+              <h3 class="feature-title">Multi-Tunnel</h3>
+              <p class="feature-description">
+                Run up to 5 concurrent tunnels per machine
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: Terminal + Install Bar + Sponsors -->
+        <div class="hero-terminal">
+          <div class="terminal-unified">
+            <div class="terminal-header">
+              <div class="terminal-controls">
+                <span class="control red"></span>
+                <span class="control yellow"></span>
+                <span class="control green"></span>
+              </div>
+              <div class="terminal-title">zsh</div>
+            </div>
+
+            <div class="terminal-body">
+              <!-- Consolidated Terminal Content -->
+              <div id="terminal-content-root" class="terminal-content active">
+                <div class="typing-view">
+                  <div class="code-line">
+                    <span id="terminal-prompt" class="prompt">$</span>
+                    <span class="typewriter">expose -port 3000</span>
+                  </div>
+                </div>
+                <div class="dashboard-view">
+                  <div class="dash-status">🚀 Tunnel Established!</div>
+                  <div class="dash-row">
+                    <span class="dash-label">🌐 Public URL:</span>
+                    <span class="tunnel-url">https://a7k2p9.expose.host</span>
+                  </div>
+                  <div class="dash-row">
+                    <span class="dash-label">📡 Local Port:</span>
+                    <span class="dash-value">3000</span>
+                  </div>
+                  <div class="dash-row">
+                    <span class="dash-label">✅ Allowed:</span>
+                    <span class="dash-value">*</span>
+                  </div>
+                  <div class="dash-row">
+                    <span class="dash-label">❌ Denied:</span>
+                    <span class="dash-value">(none)</span>
+                  </div>
+
+                  <div class="dash-log-section">
+                    <div class="dash-label" style="margin-bottom: 0.5rem">
+                      📡 Live Requests:
+                    </div>
+                    <div class="log-row">
+                      <span style="color: #22c55e">GET</span>
+                      <span style="color: var(--text-muted)">/api/v1/users</span>
+                      <span style="margin-left: auto; color: var(--text-muted)"
+                        >200 OK</span
+                      >
+                    </div>
+                    <div class="log-row">
+                      <span style="color: #eab308">POST</span>
+                      <span style="color: var(--text-muted)">/webhook/stripe</span>
+                      <span style="margin-left: auto; color: var(--text-muted)"
+                        >200 OK</span
+                      >
+                    </div>
+                    <div class="log-row">
+                      <span style="color: #22c55e">GET</span>
+                      <span style="color: var(--text-muted)">/static/main.css</span>
+                      <span style="margin-left: auto; color: var(--text-muted)"
+                        >304</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Install Bar (Quick Start) -->
+          <div class="hero-install-container" id="install-bar">
+            <div class="hero-install-box">
+              <div class="install-header">
+                <div class="install-label">Quick Start</div>
+                <div class="terminal-tabs-mini">
+                  <button
+                    class="terminal-tab-mini active"
+                    data-os="unix"
+                    onclick="switchOsTab('unix')"
+                  >
+                    macOS / Linux
+                  </button>
+                  <button
+                    class="terminal-tab-mini"
+                    data-os="windows"
+                    onclick="switchOsTab('windows')"
+                  >
+                    Windows
+                  </button>
+                </div>
+              </div>
+              <div class="install-body">
+                <div class="install-command" id="install-cmd-text">
+                  curl -sSL https://expose.host/install.sh | bash
+                </div>
+                <button class="copy-icon" onclick="copyInstallCmd(this)" title="Copy to clipboard" aria-label="Copy to clipboard">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section class="sponsors-section">
+      <div class="container">
+        <div class="sponsors-banner">
+          <p class="sponsors-title">PROUDLY SUPPORTED BY</p>
+          <div class="sponsors-grid">
+            <!-- Dynamic Sponsors Logic / Placeholder -->
+            <div class="sponsor-logos">
+              <a href="https://github.com/sponsors/havefish" target="_blank" class="sponsor-slot featured">
+                <span class="sponsor-plus">+</span>
+                <span class="sponsor-text">Become a sponsor</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="security" class="security-section">
+      <div class="security-schematic-wrapper">
+        <h2>Secure by Design</h2>
+        <svg
+          class="security-schematic"
+          viewBox="0 0 800 200"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- Zones -->
+          <circle cx="100" cy="100" r="40" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+          <text x="100" y="160" text-anchor="middle" font-family="Inter" font-weight="600" fill="#475569" font-size="14">External User</text>
+          
+          <rect x="340" y="60" width="120" height="80" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+          <text x="400" y="160" text-anchor="middle" font-family="Inter" font-weight="600" fill="#475569" font-size="14">Expose Relay</text>
+          
+          <rect x="660" y="70" width="80" height="60" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+          <text x="700" y="160" text-anchor="middle" font-family="Inter" font-weight="600" fill="#475569" font-size="14">Local Machine</text>
+          
+          <!-- Connections -->
+          <path d="M140 100 H340" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 6"/>
+          <path d="M460 100 H660" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 6"/>
+          
+          <!-- TLS Badges -->
+          <g class="tls-pulse">
+            <rect x="210" y="85" width="60" height="30" rx="15" fill="#10b981"/>
+            <text x="240" y="105" text-anchor="middle" font-family="Inter" font-weight="700" fill="white" font-size="10">TLS 1.3</text>
+          </g>
+          
+          <g class="tls-pulse">
+            <rect x="530" y="85" width="60" height="30" rx="15" fill="#4f46e5"/>
+            <text x="560" y="105" text-anchor="middle" font-family="Inter" font-weight="700" fill="white" font-size="10">TLS 1.3</text>
+          </g>
+        </svg>
+
+        <div class="security-pillars">
+          <div class="pillar-item">
+            <h4><span class="pillar-dot"></span> End-to-End Encryption</h4>
+            <p>Every byte of data — from the global internet to your local localhost — is strictly encrypted using industrial-grade TLS.</p>
+          </div>
+          <div class="pillar-item">
+            <h4><span class="pillar-dot"></span> Zero Logs, Zero Data</h4>
+            <p>We only process transient metadata at the edge for rate limiting. We never log or store the content of your traffic.</p>
+          </div>
+          <div class="pillar-item">
+            <h4><span class="pillar-dot"></span> Edge Protection</h4>
+            <p>Unauthorized paths and methods are instantly rejected by the relay, shielding your machine from bots and malicious probes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="docs" class="docs-container">
+      <aside class="docs-sidebar">
+        <div class="toc-group">Guide</div>
+        <nav class="toc" aria-label="Table of Contents">
+          <a href="#install" class="toc-link active">Install</a>
+          <a href="#expose-port" class="toc-link">Expose a port</a>
+          <a href="#sticky-tunnels" class="toc-link">Sticky tunnels</a>
+          <a href="#allow-paths" class="toc-link">Allow certain path(s)</a>
+          <a href="#deny-paths" class="toc-link">Deny certain path(s)</a>
+          <a href="#allow-methods" class="toc-link">Allow certain method(s)</a>
+          <a href="#deny-methods" class="toc-link">Deny certain method(s)</a>
+          <a href="#webhook-testing" class="toc-link">Webhook Testing</a>
+          <a href="#uninstall" class="toc-link">Uninstall</a>
+          <a href="#service-limits" class="toc-link header-link"
+            >Service Limits</a
+          >
+          <a href="#support" class="toc-link header-link"
+            >Support & Feedback</a
+          >
+          <a href="#terms-privacy" class="toc-link header-link"
+            >Terms & Privacy</a
+          >
+        </nav>
+
+        <style>
+        /* Visibility Helpers */
+        .desktop-only {
+            display: block;
+        }
+
+        .mobile-only {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .desktop-only {
+                display: none !important;
+            }
+
+            .mobile-only {
+                display: block !important;
+            }
+        }
+
+        /* Hero Security Map */
+        .hero-security-map {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-top: 1px solid var(--terminal-border);
+        }
+
+        .security-tagline {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        </style>
+
+        <div class="ad-sidebar-container">
+          <a
+            href="https://www.ethicalads.io/"
+            target="_blank"
+            class="ethical-ad-placeholder"
+          >
+            <span class="ad-tag">Ethical Ad</span>
+            <div class="ad-content">
+              <span class="ad-title">Support the Project</span>
+              <p class="ad-description">
+                Relevant, privacy-focused ads for developers. No tracking. Just
+                tech.
+              </p>
+              <span class="ad-cta">Become a Publisher &rarr;</span>
+            </div>
+          </a>
+          <!-- Real Ad Slot (Hidden until approved) -->
+          <div
+            id="ethical-ad"
+            class="horizontal"
+            data-ea-publisher="expose-host"
+            data-ea-type="text"
+          ></div>
+        </div>
+      </aside>
+
+      <div class="docs-content glass">
+        <h3 id="install">Install, Update & Uninstall</h3>
+        <p>Manage the <code>expose</code> CLI lifecycle with these commands:</p>
+
+        <div class="install-section">
+          <span class="platform-heading">Install (macOS / Linux)</span>
+          <div class="code-block">
+            curl -sSL https://expose.host/install.sh | bash
+          </div>
+
+          <span class="platform-heading mt-6"
+            >Install (Windows PowerShell)</span
+          >
+          <div class="code-block">
+            iwr -useb https://expose.host/install.ps1 | iex
+          </div>
+        </div>
+
+        <p class="mt-4">
+          <strong>Verify Installation:</strong> After installation, check the
+          version:
+        </p>
+        <div class="code-block" style="margin-top: 0.5rem">expose -version</div>
+
+        <p class="mt-4">
+          <strong>Update:</strong> To update Expose to the latest version, run:
+        </p>
+        <div class="code-block">expose update</div>
+
+        <p class="mt-4">
+          <strong>Uninstall:</strong> To uninstall Expose, run and confirm when
+          prompted:
+        </p>
+        <div class="code-block">expose uninstall</div>
+
+        <h3 class="mt-8" id="expose-port">Expose a port</h3>
+        <p>Start a tunnel to expose a local port to a public URL instantly.</p>
+
+        <div class="code-block">expose -port 3000</div>
+
+        <h3 class="mt-8" id="sticky-tunnels">Sticky tunnels</h3>
+        <p>
+          Always get the same subdomain for your applications across restarts.
+        </p>
+        <div class="code-block">expose -port 3000 -sticky</div>
+        <div class="note mt-4">
+          <strong>✨ Highlight:</strong> When you use the
+          <code>-sticky</code> flag, Expose ensures that the
+          <strong>same port on the same machine</strong> always receives the
+          same public URL. No more updating webhook URLs or sharing new links
+          every time you restart your tunnel.
+        </div>
+
+        <h3 class="mt-8" id="allow-paths">Allow certain path(s)</h3>
+        <p>
+          Whitelist specific URL paths or patterns using wildcards. You can 
+          specify the <code>-allow</code> flag multiple times to combine 
+          filters.
+        </p>
+
+        <div class="code-block">
+          expose -port 3000 -allow "/api/*" -allow "/webhooks/*"
+        </div>
+
+        <div class="note mt-4">
+          <strong>✨ Pro Tip:</strong> Wildcards ending in <code>/*</code> 
+          are <strong>inclusive</strong>. For example, <code>/admin/*</code> 
+          matches both the <code>/admin</code> path exactly and everything 
+          under it.
+        </div>
+
+        <h3 class="mt-8" id="deny-paths">Deny certain path(s)</h3>
+        <p>
+          Block access to sensitive paths at the edge. Like allow rules, 
+          you can specify <code>-deny</code> multiple times.
+        </p>
+        <p class="mt-2">
+          <strong>Note:</strong> Deny rules are computed <strong>after</strong> 
+          allow rules. A request must pass the allow whitelist before 
+          being checked against the deny blacklist.
+        </p>
+
+        <div class="code-block">
+          expose -port 3000 -allow "/api/*" -deny "/api/v1/internal/*"
+        </div>
+
+        <h3 class="mt-8" id="allow-methods">Allow certain method(s)</h3>
+        <p>
+          Filter incoming traffic to permit only specific HTTP methods like POST
+          or GET.
+        </p>
+
+        <div class="code-block">expose -port 3000 -allow "POST /*"</div>
+
+        <h3 class="mt-8" id="deny-methods">Deny certain method(s)</h3>
+        <p>
+          Reject requests that use unauthorized or unwanted HTTP methods at the
+          edge.
+        </p>
+
+        <div class="code-block">expose -port 3000 -deny "DELETE /*"</div>
+
+        <h3 class="mt-8" id="webhook-testing">Webhook Testing</h3>
+        <p>
+          Testing webhooks (GitHub, Stripe, Twilio) locally used to be a pain.
+          With Expose, it's a 4-step process:
+        </p>
+
+        <div class="steps-container mt-6">
+          <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+              <strong>Start your Local Server:</strong> Make sure your
+              application is running on a local port (e.g., <code>3000</code>).
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+              <strong>Expose it:</strong> Run <code>expose -port 3000</code>.
+              Copy the public URL provided (e.g.,
+              <code>https://abc12.expose.host</code>).
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+              <strong>Configure the Provider:</strong> Go to your GitHub or
+              Stripe webhook settings and paste the Expose URL as the Payload
+              URL.
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-number">4</span>
+            <div class="step-content">
+              <strong>Test & Debug:</strong> Trigger a test event from the
+              provider. You'll see the request hit your local server instantly.
+            </div>
+          </div>
+        </div>
+
+        <h4 class="mt-8">Shield your local server (Pro Tip)</h4>
+        <p>
+          To avoid exposing your entire local app, you can restrict access to
+          just the webhook endpoint:
+        </p>
+        <div class="code-block">
+          expose -port 3000 -allow "POST /api/webhooks/*"
+        </div>
+        <div class="note mt-4">
+          <strong>Why this matters:</strong> Expose will instantly reject any
+          request that isn't a <code>POST</code> or doesn't match your webhook
+          path, blocking bots and unauthorized probes at the edge before they
+          even reach your machine.
+        </div>
+
+        <!-- Limits Section Restored -->
+        <hr class="section-divider" />
+        <h2 id="service-limits">Service Limits</h2>
+        <p>
+          Expose is a completely <strong>free service</strong>. To ensure
+          stability and reliability for everyone, fair-use limits apply.
+        </p>
+        <ul class="docs-list">
+          <li>
+            <strong>Unlimited Session Duration:</strong> Tunnels stay active as
+            long as your client is connected.
+          </li>
+          <li>
+            <strong>5 Active Tunnels:</strong> You can run up to 5 concurrent
+            tunnels per machine.
+          </li>
+        </ul>
+
+        <hr class="section-divider" />
+        <h2 id="support">Support & Feedback</h2>
+        <p>
+          Expose is community-focused, and we welcome your feedback. If you
+          encounter any bugs or have ideas for new features, please reach out.
+        </p>
+        <div class="note mt-6">
+          <strong>Community Support:</strong> The best way to get help or
+          suggest improvements is to 
+          <a href="https://github.com/havefish/expose-releases/issues" target="_blank">create an issue on our GitHub repository</a>.
+        </div>
+
+        <!-- Features Section Restored -->
+        <hr class="section-divider" />
+        <h2 id="terms-privacy">Terms & Privacy</h2>
+        <p>
+          By using Expose, you agree to these simple rules designed to keep the
+          service fast and free for everyone.
+        </p>
+
+        <h4 class="mt-6">Terms of Service</h4>
+        <ul class="docs-list">
+          <li>
+            <strong>Fair Use:</strong> Do not use Expose for any illegal
+            activities, hosting malware, or bypassing security controls.
+          </li>
+          <li>
+            <strong>No Guarantees:</strong> The service is provided "as is"
+            without warranties. While we strive for 100% uptime, tunnels may
+            disconnect due to network conditions.
+          </li>
+          <li>
+            <strong>Resource Limits:</strong> Excessive bandwidth usage or
+            attempts to circumvent session limits may result in temporary IP
+            bans.
+          </li>
+        </ul>
+
+        <h4 class="mt-6">Privacy Policy</h4>
+        <ul class="docs-list">
+          <li>
+            <strong>No Logs:</strong> We do not log the content of the traffic
+            passing through your tunnels.
+          </li>
+          <li>
+            <strong>Metadata:</strong> We only process transient metadata (like
+            IP addresses) for rate limiting and DDoS protection. This data is
+            not stored long-term.
+          </li>
+          <li>
+            <strong>No Signups:</strong> We explicitly don't want or need your
+            email address to provide this service.
+          </li>
+        </ul>
+
+        <hr class="section-divider" />
+
+      </div>
+    </section>
+
+    <footer class="simple-footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-info">
+            <p>&copy; 2026 Chinmaya Panda. All rights reserved.</p>
+            <a href="https://github.com/havefish" target="_blank" class="creator-credit-link">
+              <span>Created with ❤️ by <strong>havefish</strong></span>
+              <img src="https://github.com/havefish.png" alt="havefish" class="creator-avatar" />
+            </a>
+          </div>
+          <div class="footer-links">
+            <a href="https://github.com/havefish/expose-releases" target="_blank" class="footer-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-icon"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.28 1.15-.28 2.35 0 3.5-.73 1.02-1.08 2.25-1 3.5 0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+              GitHub
+            </a>
+            <a href="https://github.com/havefish/expose-releases/blob/main/CONTRIBUTING.md" target="_blank" class="footer-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-icon"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Contribute
+            </a>
+            <a href="https://github.com/sponsors/havefish" target="_blank" class="footer-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-icon"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              Sponsor
+            </a>
+            <a href="https://www.linkedin.com/in/chinmaya-panda-ba8831165/" target="_blank" class="footer-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="#" target="_blank" class="footer-link hn-link" style="display: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff6600" xmlns="http://www.w3.org/2000/svg" class="footer-icon"><path d="M0 0h24v24H0z"/><path d="M11 12.5L7.5 5h2.5l2 4 2-4h2.5l-3.5 7.5V19h-2v-6.5z" fill="#fff"/></svg>
+              Hacker News
+            </a>
+            <a href="mailto:hello@expose.host" class="footer-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-icon"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              hello@expose.host
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // 1. OS Switching Logic (Hero & Install Bar)
+      window.switchOsTab = function (os) {
+        // Update all tab buttons (now in the install bar)
+        document.querySelectorAll(".terminal-tab-mini").forEach((tab) => {
+          tab.classList.toggle("active", tab.dataset.os === os);
+        });
+
+        // Update Shell Prompt
+        const prompt = document.getElementById("terminal-prompt");
+        if (prompt) {
+          prompt.textContent = (os === "windows") ? "PS>" : "$";
+        }
+
+        // Restart Terminal Content Animations
+        const content = document.getElementById("terminal-content-root");
+        if (content) {
+          content.classList.remove("active");
+          void content.offsetWidth; // Trigger reflow
+          content.classList.add("active");
+        }
+
+        // Update Installation Command & Terminal Title
+        const installCmd = document.getElementById("install-cmd-text");
+        const terminalTitle = document.querySelector(".terminal-title");
+        
+        if (os === "windows") {
+          if (installCmd) installCmd.textContent = "iwr https://expose.host/install.ps1 | iex";
+          if (terminalTitle) terminalTitle.textContent = "powershell";
+        } else {
+          if (installCmd) installCmd.textContent = "curl -sSL https://expose.host/install.sh | bash";
+          if (terminalTitle) terminalTitle.textContent = "zsh";
+        }
+      };
+
+      // 2. Clipboard Helpers
+      window.copyInstallCmd = function (btn) {
+        const textElement = document.getElementById("install-cmd-text");
+        if (!textElement) return;
+        
+        const text = textElement.textContent.trim();
+        navigator.clipboard.writeText(text);
+
+        const originalInner = btn.innerHTML;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--success-color)"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.innerHTML = originalInner;
+          btn.classList.remove("copied");
+        }, 2000);
+      };
+
+      window.copyCmd = function (btn) {
+        const line = btn.closest(".code-line");
+        const text = line.querySelector(".cmd").textContent.trim();
+        navigator.clipboard.writeText(text);
+
+        const originalInner = btn.innerHTML;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--success-color)"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        setTimeout(() => (btn.innerHTML = originalInner), 2000);
+      };
+
+      // 3. Page Lifecycle & Scroll logic
+      document.addEventListener("DOMContentLoaded", () => {
+        // Auto-detect OS
+        const isWindows = window.navigator.userAgent.toLowerCase().includes("windows");
+        window.switchOsTab(isWindows ? "windows" : "unix");
+
+        // Sidebar Navigation (TOC Highlight)
+        let isManualScroll = false;
+        let manualScrollTimeout;
+
+        const observerOptions = {
+          rootMargin: "-0% 0px -50% 0px",
+          threshold: 0,
+        };
+
+        const observer = new IntersectionObserver(() => {
+          if (isManualScroll) return; 
+
+          const sections = document.querySelectorAll(
+            "main.hero, .docs-content h3[id], .docs-content h2[id]",
+          );
+          const navLinks = document.querySelectorAll(".toc-link");
+
+          let currentSection = "";
+          sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 110) {
+              currentSection = section.id || "hero";
+            }
+          });
+
+          if (currentSection) {
+            navLinks.forEach((link) => {
+              const id = link.getAttribute("href").replace("#", "");
+              const isActive = id === currentSection;
+              link.classList.toggle("active", isActive);
+            });
+
+            if (currentSection !== "hero") {
+              const newHash = `#${currentSection}`;
+              if (window.location.hash !== newHash) {
+                history.replaceState(null, null, newHash);
+              }
+            } else if (window.location.hash) {
+              history.replaceState(null, null, window.location.pathname + window.location.search);
+            }
+          }
+        }, observerOptions);
+
+        // TOC click handling
+        document.querySelectorAll(".toc-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            isManualScroll = true;
+            clearTimeout(manualScrollTimeout);
+
+            document.querySelectorAll(".toc-link").forEach((l) => l.classList.remove("active"));
+            link.classList.add("active");
+
+            manualScrollTimeout = setTimeout(() => {
+              isManualScroll = false;
+            }, 800);
+          });
+        });
+
+        document.querySelectorAll("main.hero, .docs-content h3[id], .docs-content h2[id]").forEach((section) => {
+          observer.observe(section);
+        });
+
+        // Make documentation code blocks copyable
+        document.querySelectorAll(".code-block").forEach((block) => {
+          const text = block.textContent.trim();
+          block.innerHTML = `<span>${text}</span><button class="copy-icon" title="Copy to clipboard" aria-label="Copy to clipboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>`;
+
+          block.addEventListener("click", () => {
+            navigator.clipboard.writeText(text);
+            const icon = block.querySelector(".copy-icon");
+            const originalInner = icon.innerHTML;
+            icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--success-color)"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            block.classList.add("copied");
+            setTimeout(() => {
+              icon.innerHTML = originalInner;
+              block.classList.remove("copied");
+            }, 2000);
+          });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById("mobile-menu");
+        const navLinksResponsive = document.querySelector(".links");
+
+        if (mobileMenuBtn && navLinksResponsive) {
+          mobileMenuBtn.addEventListener("click", () => {
+            navLinksResponsive.classList.toggle("nav-open");
+          });
+
+          navLinksResponsive.addEventListener("click", (e) => {
+            if (e.target.closest("a")) {
+              navLinksResponsive.classList.remove("nav-open");
+            }
+          });
+        }
+
+        // Live status check
+        (async () => {
+          const dot = document.getElementById("status-dot");
+          const text = document.getElementById("status-text");
+          if (!dot || !text) return;
+          try {
+            await fetch("https://api.expose.host/health", { signal: AbortSignal.timeout(5000) });
+          } catch {
+            dot.style.background = "#ef4444";
+            text.textContent = "Service Disruption";
+          }
+        })();
+      });
+    </script>
+    <!-- Cloudflare Web Analytics -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "847ec8b5bb0f47b09fdde1d2811d0ac4"}'
+    ></script>
+    <!-- End Cloudflare Web Analytics -->
+    <a
+      href="https://github.com/havefish/expose-releases"
+      target="_blank"
+      class="floating-github"
+    >
+      <svg class="github-icon" viewBox="0 0 24 24">
+        <path
+          d="M12 .587c-6.627 0-12 5.373-12 12c0 5.302 3.438 9.8 8.207 11.387c.6.113.82-.258.82-.577c0-.285-.011-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.392 24 17.892 24 12.587c0-6.627-5.373-12-12-12"
+        />
+      </svg>
+      <span class="star-label">GitHub</span>
+    </a>
+  </body>
+</html>
