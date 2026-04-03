@@ -105,4 +105,4 @@ fi
 
 
 echo ""
-echo "Try running 'expose -port 8080' to start tunneling!"
+echo "Try running 'expose -port 3000' to start tunneling!"

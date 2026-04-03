@@ -23,11 +23,11 @@ To test changes to the website locally:
 2.  **Start a local server**:
     You can use any static file server. For example, using Python:
     ```bash
-    python3 -m http.server 8080
+    python3 -m http.server 3000
     ```
 
 3.  **Preview**:
-    Open `http://localhost:8080` in your browser.
+    Open `http://localhost:3000` in your browser.
 
 ## 📬 How to Contribute
 

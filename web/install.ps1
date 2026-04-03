@@ -65,4 +65,4 @@ if ($UserPath -notmatch [regex]::Escape($InstallDir)) {
 }
 
 Write-Host "$Check Successfully installed 'expose'." -ForegroundColor Green
-Write-Host "Try running 'expose -port 8080' to start tunneling!" -ForegroundColor Gray
+Write-Host "Try running 'expose -port 3000' to start tunneling!" -ForegroundColor Gray
