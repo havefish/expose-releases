@@ -28,7 +28,7 @@ iwr -useb https://expose.host/install.ps1 | iex
 
 Expose is designed for developers who want a **professional, private, and frictionless** way to demo apps and test webhooks without the baggage of personal account management.
 
-- **Zero Auth**: No signups, no dashboards, no tracking cookies. We don't want your email address.
+- **Zero Auth**: No signups, no dashboards, no tracking cookies. We literally don't want your data.
 - **Sticky Subdomains**: Expose uses machine-fingerprinting to ensure you get the same public URL every time you connect.
 - **Edge Filtering**: A built-in firewall at our relay. Block or allow specific paths (like `/admin/*`) before they even reach your machine.
 - **Single Binary**: No dependencies to install. Just a fast, minimalist Go-powered binary.
