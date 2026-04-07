@@ -346,6 +346,30 @@ h6[id] {
     min-width: 0;
 }
 
+.webhook-promo {
+    margin-top: 2rem;
+    padding: 0.75rem 1rem;
+    background: rgba(var(--brand-primary-rgb), 0.04);
+    border: 1px solid rgba(var(--brand-primary-rgb), 0.1);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: inline-block;
+    line-height: 1.5;
+}
+
+.webhook-promo a {
+    color: var(--brand-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.webhook-promo a:hover {
+    color: var(--brand-primary-hover);
+    text-decoration: underline;
+}
+
 .hero-terminal {
     display: flex;
     flex-direction: column;
